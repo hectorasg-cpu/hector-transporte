@@ -1,0 +1,18 @@
+ARCHIVOS ACTUALIZADOS PARA SUBIR A GITHUB / RAILWAY
+
+Sube o reemplaza estos archivos dentro de la carpeta crea-una-aplicaci-n-web-simple:
+
+1. outputs/app.js
+2. outputs/index.html
+3. outputs/styles.css
+4. data/state.json
+5. server.js
+
+Cambios incluidos:
+- Paradas del viaje.
+- Bidones y botellas por parada.
+- Cobro fisico por parada.
+- Monto y estado de cobro.
+- Correccion para guardar pedidos nuevos.
+
+Fecha: 2026-07-02

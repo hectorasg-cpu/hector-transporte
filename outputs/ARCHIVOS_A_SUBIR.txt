@@ -1,0 +1,10 @@
+Dockerfile
+.dockerignore
+package.json
+server.js
+railway.json
+README.md
+outputs/index.html
+outputs/styles.css
+outputs/app.js
+data/state.json

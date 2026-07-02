@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transporte | Pedidos</title>
+    <link rel="stylesheet" href="./styles.css?v=vino-20260702">
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">T</div>
+        <div><strong>Transporte</strong><span>Pedidos semanales</span></div>
+      </div>
+      <nav class="tabs" aria-label="Secciones">
+        <button class="tab active" data-view="dashboard">Inicio</button>
+        <button class="tab" data-view="orders">Pedidos</button>
+        <button class="tab" data-view="clients">Clientes</button>
+        <button class="tab" data-view="trucks">Camiones</button>
+        <button class="tab" data-view="tractorTrailers">Tractores y Colosos</button>
+        <button class="tab" data-view="drivers">Conductores</button>
+        <button class="tab" data-view="helpers">Peonetas</button>
+        <button class="tab" data-view="calendar">Calendario</button>
+      </nav>
+    </aside>
+    <main class="app">
+      <header class="topbar">
+        <div><p class="eyebrow">Version con servidor compartido · <span id="syncStatus">Conectando...</span></p><h1>Gestion de pedidos de transporte</h1></div>
+        <div class="top-actions"><button id="exportData" class="ghost-button">Exportar datos</button><label class="import-button"><input id="importData" type="file" accept="application/json">Importar datos</label><button id="newOrderTop" class="primary-button">Nuevo pedido</button></div>
+      </header>
+      <section id="dashboard" class="view active">
+        <div class="metric-grid">
+          <article class="metric"><span>Pedidos</span><strong id="metricOrders">0</strong></article>
+          <article class="metric"><span>Clientes</span><strong id="metricClients">0</strong></article>
+          <article class="metric"><span>Camiones activos</span><strong id="metricTrucks">0</strong></article>
+          <article class="metric"><span>Tractores/colosos activos</span><strong id="metricTractorTrailers">0</strong></article>
+          <article class="metric"><span>Conductores disponibles</span><strong id="metricDrivers">0</strong></article>
+          <article class="metric"><span>Peonetas disponibles</span><strong id="metricHelpers">0</strong></article>
+          <article class="metric"><span>Viajes por rendir</span><strong id="metricSettlement">0</strong></article>
+        </div>
+        <section id="alertsPanel" class="panel alerts-panel"><div class="section-heading"><div><h2>Avisos</h2><p>Recordatorios para viajes del dia siguiente.</p></div><button id="enableNotifications" class="ghost-button" type="button">Activar notificaciones</button></div><div id="alertsList" class="alerts-list"></div></section>
+        <div class="split">
+          <section class="panel"><div class="section-heading"><h2>Pedidos de esta semana</h2><button class="ghost-button" data-view-link="orders">Ver pedidos</button></div><div id="upcomingOrders" class="stack"></div></section>
+          <section class="panel"><div class="section-heading"><h2>Flota</h2><button class="ghost-button" data-view-link="trucks">Ver camiones</button></div><div id="fleetStatus" class="stack"></div></section>
+        </div>
+      </section>
+      <section id="orders" class="view">
+        <div class="section-heading"><div><h2>Pedidos</h2><p>Alta rapida, multiples clientes por pedido y asignacion basica.</p></div><button id="newOrder" class="primary-button">Agregar pedido</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Codigo</th><th>Paradas</th><th>Origen</th><th>Fecha</th><th>Camion</th><th>Conductor</th><th>Peonetas</th><th>Estado</th><th>Rendicion</th><th></th></tr></thead><tbody id="ordersTable"></tbody></table></div>
+      </section>
+      <section id="clients" class="view">
+        <div class="section-heading"><div><h2>Clientes</h2><p>Contactos basicos para asociarlos a pedidos.</p></div><button id="newClient" class="primary-button">Agregar cliente</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Contacto</th><th>Telefono</th><th>Ciudad</th><th></th></tr></thead><tbody id="clientsTable"></tbody></table></div>
+      </section>
+      <section id="trucks" class="view">
+        <div class="section-heading"><div><h2>Camiones</h2><p>Patente, capacidad y disponibilidad de la flota.</p></div><button id="newTruck" class="primary-button">Agregar camion</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Patente</th><th>Modelo</th><th>Capacidad</th><th>Estado</th><th></th></tr></thead><tbody id="trucksTable"></tbody></table></div>
+      </section>
+      <section id="tractorTrailers" class="view">
+        <div class="section-heading"><div><h2>Tractores y Colosos</h2><p>Equipos de arrastre o apoyo para asignar a viajes.</p></div><button id="newTractorTrailer" class="primary-button">Agregar equipo</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Tipo</th><th>Patente/Codigo</th><th>Modelo</th><th>Capacidad</th><th>Estado</th><th></th></tr></thead><tbody id="tractorTrailersTable"></tbody></table></div>
+      </section>
+
+      <section id="drivers" class="view">
+        <div class="section-heading"><div><h2>Conductores</h2><p>Disponibilidad y licencias para asignaciones simples.</p></div><button id="newDriver" class="primary-button">Agregar conductor</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Telefono</th><th>Licencia</th><th>Estado</th><th></th></tr></thead><tbody id="driversTable"></tbody></table></div>
+      </section>
+      <section id="helpers" class="view">
+        <div class="section-heading"><div><h2>Peonetas</h2><p>Apoyo opcional para cargar, descargar y acompanar viajes.</p></div><button id="newHelper" class="primary-button">Agregar peoneta</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Telefono</th><th>Estado</th><th></th></tr></thead><tbody id="helpersTable"></tbody></table></div>
+      </section>
+
+      <section id="calendar" class="view">
+        <div class="section-heading"><div><h2>Calendario semanal</h2><p>Pedidos programados de lunes a domingo.</p></div><button class="ghost-button" data-view-link="orders">Editar pedidos</button></div>
+        <div id="weeklyCalendar" class="calendar"></div>
+      </section>
+    </main>
+    <dialog id="editor"><form id="editorForm"><div class="modal-head"><h2 id="editorTitle">Editar</h2><button type="button" data-close-editor class="icon-button" aria-label="Cerrar">x</button></div><div id="editorFields" class="form-grid"></div><menu><button type="button" data-close-editor class="ghost-button">Cancelar</button><button id="saveEditor" type="button" class="primary-button">Guardar</button></menu></form></dialog>
+    <script src="./app.js?v=avisos-20260702a"></script>
+  </body>
+</html>

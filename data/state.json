@@ -1,0 +1,332 @@
+{
+  "clients": [
+    {
+      "id": "c5-mr184uk3",
+      "name": "Myriam Zuñiga",
+      "contact": "+569telefono",
+      "phone": "telefono",
+      "city": "San Javier"
+    },
+    {
+      "id": "c2-mr187tg8",
+      "name": "Yo Claudio Ruta 5",
+      "contact": "Supervisor Ruta 5 Parral",
+      "phone": "+569telefono",
+      "city": "Parral"
+    },
+    {
+      "id": "c3-mr188f0i",
+      "name": "Yo Claudio Ciudad Parral",
+      "contact": "Supervisora Yo Claudio Ciudad",
+      "phone": "+569",
+      "city": "Parral"
+    },
+    {
+      "id": "c4-mr18e355",
+      "name": "Rodolfo",
+      "contact": "Rodolfo",
+      "phone": "+569",
+      "city": "Limache"
+    }
+  ],
+  "trucks": [
+    {
+      "id": "t1-mr189ebo",
+      "plate": "JAC",
+      "model": "JAC Camioneta",
+      "capacity": "2500",
+      "status": "Disponible"
+    },
+    {
+      "id": "t2-mr189nfq",
+      "plate": "Mercedes",
+      "model": "Mercedes Camión",
+      "capacity": "5000",
+      "status": "Disponible"
+    },
+    {
+      "id": "t3-mr18ab5s",
+      "plate": "Ford",
+      "model": "Ford Ranger Gris",
+      "capacity": "1000",
+      "status": "Mantencion"
+    }
+  ],
+  "tractorTrailers": [
+    {
+      "id": "tc1",
+      "type": "Tractor",
+      "plate": "TR-001",
+      "model": "John Deere 5075E",
+      "capacity": "75 HP",
+      "status": "Disponible"
+    },
+    {
+      "id": "tc2",
+      "type": "Coloso",
+      "plate": "CO-014",
+      "model": "Coloso agricola",
+      "capacity": "8 ton",
+      "status": "Arrendado"
+    }
+  ],
+  "drivers": [
+    {
+      "id": "d3",
+      "name": "Marcelo Ortega",
+      "phone": "+56 9 72516603",
+      "license": "A5",
+      "status": "Disponible"
+    }
+  ],
+  "helpers": [
+    {
+      "id": "p1-mr18c5n7",
+      "name": "Camilo Muñoz",
+      "phone": "74740570",
+      "status": "Disponible"
+    },
+    {
+      "id": "p2-mr18cmpi",
+      "name": "Ricardo Carter",
+      "phone": "+569",
+      "status": "Disponible"
+    }
+  ],
+  "orders": [
+    {
+      "id": "o4-mr18ogm9",
+      "code": "PED-1004",
+      "origin": "Melozal",
+      "date": "2026-07-01",
+      "truckId": "t2-mr189nfq",
+      "driverId": "d3",
+      "status": "Programado",
+      "stops": [
+        {
+          "clientId": "c4-mr18e355",
+          "destination": "Limache",
+          "bottles": "",
+          "drums": "",
+          "collectPayment": false,
+          "collectionAmount": "",
+          "paymentStatus": "No aplica",
+          "notes": ""
+        }
+      ],
+      "helperIds": [
+        "p1-mr18c5n7"
+      ],
+      "settlement": {
+        "finished": false,
+        "driverSettled": false,
+        "helpersSettled": false,
+        "returnedAmount": "",
+        "notes": ""
+      }
+    },
+    {
+      "id": "o2-mr18vgyj",
+      "code": "PED-1002",
+      "origin": "Melozal",
+      "date": "2026-07-02",
+      "truckId": "t2-mr189nfq",
+      "driverId": "d3",
+      "status": "Programado",
+      "stops": [
+        {
+          "clientId": "c2-mr187tg8",
+          "destination": "Parral",
+          "bottles": "",
+          "drums": "",
+          "collectPayment": false,
+          "collectionAmount": "",
+          "paymentStatus": "No aplica",
+          "notes": ""
+        }
+      ],
+      "helperIds": [],
+      "settlement": {
+        "finished": false,
+        "driverSettled": false,
+        "helpersSettled": false,
+        "returnedAmount": "",
+        "notes": ""
+      }
+    },
+    {
+      "id": "o3-mr3llhs5",
+      "code": "PED-1003",
+      "origin": "Melozal",
+      "date": "2026-07-02",
+      "truckId": "t1-mr189ebo",
+      "driverId": "d3",
+      "status": "Pendiente",
+      "stops": [
+        {
+          "clientId": "c5-mr184uk3",
+          "destination": "Conversar con Rodolfo",
+          "drums": "0",
+          "bottles": "0",
+          "collectPayment": false,
+          "collectionAmount": "",
+          "paymentStatus": "No aplica",
+          "notes": ""
+        }
+      ],
+      "helperIds": [],
+      "settlement": {
+        "finished": false,
+        "driverSettled": false,
+        "helpersSettled": false,
+        "returnedAmount": "",
+        "notes": ""
+      }
+    },
+    {
+      "id": "o4-mr3llhs6",
+      "code": "PED-1003",
+      "origin": "Melozal",
+      "date": "2026-07-02",
+      "truckId": "t1-mr189ebo",
+      "driverId": "d3",
+      "status": "Pendiente",
+      "stops": [
+        {
+          "clientId": "c5-mr184uk3",
+          "destination": "Conversar con Rodolfo",
+          "drums": "0",
+          "bottles": "0",
+          "collectPayment": false,
+          "collectionAmount": "",
+          "paymentStatus": "No aplica",
+          "notes": ""
+        }
+      ],
+      "helperIds": [],
+      "settlement": {
+        "finished": false,
+        "driverSettled": false,
+        "helpersSettled": false,
+        "returnedAmount": "",
+        "notes": ""
+      }
+    },
+    {
+      "id": "o5-mr3lurjy",
+      "code": "PED-1005",
+      "origin": "Melozal",
+      "date": "2026-07-02",
+      "truckId": "t1-mr189ebo",
+      "driverId": "d3",
+      "status": "Pendiente",
+      "stops": [
+        {
+          "clientId": "c5-mr184uk3",
+          "destination": "Conversar con Rodolfo",
+          "drums": "0",
+          "bottles": "0",
+          "collectPayment": false,
+          "collectionAmount": "",
+          "paymentStatus": "No aplica",
+          "notes": ""
+        }
+      ],
+      "helperIds": [],
+      "settlement": {
+        "finished": false,
+        "driverSettled": false,
+        "helpersSettled": false,
+        "returnedAmount": "",
+        "notes": ""
+      }
+    },
+    {
+      "id": "o6-mr3lurjz",
+      "code": "PED-1005",
+      "origin": "Melozal",
+      "date": "2026-07-02",
+      "truckId": "t1-mr189ebo",
+      "driverId": "d3",
+      "status": "Pendiente",
+      "stops": [
+        {
+          "clientId": "c5-mr184uk3",
+          "destination": "Conversar con Rodolfo",
+          "drums": "0",
+          "bottles": "0",
+          "collectPayment": false,
+          "collectionAmount": "",
+          "paymentStatus": "No aplica",
+          "notes": ""
+        }
+      ],
+      "helperIds": [],
+      "settlement": {
+        "finished": false,
+        "driverSettled": false,
+        "helpersSettled": false,
+        "returnedAmount": "",
+        "notes": ""
+      }
+    },
+    {
+      "id": "o7-mr3wquro",
+      "code": "PED-1007",
+      "origin": "Melozal",
+      "date": "2026-07-02",
+      "truckId": "t1-mr189ebo",
+      "driverId": "d3",
+      "status": "Pendiente",
+      "stops": [
+        {
+          "clientId": "c4-mr18e355",
+          "destination": "Conversar con Rodolfo",
+          "drums": "1008",
+          "bottles": "0",
+          "collectPayment": true,
+          "collectionAmount": "4219488",
+          "paymentStatus": "Pendiente",
+          "notes": ""
+        }
+      ],
+      "helperIds": [],
+      "settlement": {
+        "finished": false,
+        "driverSettled": false,
+        "helpersSettled": false,
+        "returnedAmount": "",
+        "notes": ""
+      }
+    },
+    {
+      "id": "o8-mr3wqurq",
+      "code": "PED-1007",
+      "origin": "Melozal",
+      "date": "2026-07-03",
+      "truckId": "t1-mr189ebo",
+      "driverId": "d3",
+      "status": "Pendiente",
+      "stops": [
+        {
+          "clientId": "c4-mr18e355",
+          "destination": "Conversar con Rodolfo",
+          "drums": "1008",
+          "bottles": "0",
+          "collectPayment": true,
+          "collectionAmount": "4219488",
+          "paymentStatus": "Pendiente",
+          "notes": ""
+        }
+      ],
+      "helperIds": [],
+      "settlement": {
+        "finished": false,
+        "driverSettled": false,
+        "helpersSettled": false,
+        "returnedAmount": "",
+        "notes": ""
+      }
+    }
+  ]
+}
