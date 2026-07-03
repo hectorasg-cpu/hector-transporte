@@ -21,6 +21,7 @@
         <button class="tab" data-view="drivers">Conductores</button>
         <button class="tab" data-view="helpers">Peonetas</button>
         <button class="tab" data-view="calendar">Calendario</button>
+        <button class="tab" data-view="history">Historial y Papelera</button>
       </nav>
     </aside>
     <main class="app">
@@ -74,8 +75,15 @@
         <div class="section-heading"><div><h2>Calendario semanal</h2><p>Pedidos programados de lunes a domingo.</p></div><button class="ghost-button" data-view-link="orders">Editar pedidos</button></div>
         <div id="weeklyCalendar" class="calendar"></div>
       </section>
+      <section id="history" class="view">
+        <div class="section-heading"><div><h2>Historial y Papelera</h2><p>Respaldos automaticos de datos editados y eliminados.</p></div><button id="clearHistory" class="ghost-button" type="button">Limpiar historial</button></div>
+        <div class="split history-split">
+          <section class="panel"><div class="section-heading"><h2>Papelera</h2><span id="trashCount" class="badge">0</span></div><div id="trashList" class="stack"></div></section>
+          <section class="panel"><div class="section-heading"><h2>Historial de cambios</h2><span id="historyCount" class="badge">0</span></div><div id="historyList" class="stack"></div></section>
+        </div>
+      </section>
     </main>
     <dialog id="editor"><form id="editorForm"><div class="modal-head"><h2 id="editorTitle">Editar</h2><button type="button" data-close-editor class="icon-button" aria-label="Cerrar">x</button></div><div id="editorFields" class="form-grid"></div><menu><button type="button" data-close-editor class="ghost-button">Cancelar</button><button id="saveEditor" type="button" class="primary-button">Guardar</button></menu></form></dialog>
-    <script src="./app.js?v=kilos-parada-20260703c"></script>
+    <script src="./app.js?v=historial-papelera-20260703"></script>
   </body>
 </html>

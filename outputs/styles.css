@@ -14,3 +14,5 @@
 .brand-logo{display:block;width:188px;max-width:100%;height:auto;padding:9px 10px;border-radius:6px;background:#fff;box-shadow:0 8px 18px rgba(0,0,0,.12)}.brand>span{display:block;color:#d7a9ba;font-size:13px}
 
 .stop-total-box{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;background:#fff8fb}.stop-total-box span{color:var(--muted);font-size:13px;font-weight:700}.stop-total-box strong{font-size:20px;color:var(--accent-dark)}
+
+.history-split{grid-template-columns:1fr 1fr}.history-item .actions{justify-content:flex-start;margin-top:6px}.danger-action{color:var(--danger)}.empty-state{background:#fbfcfc}@media(max-width:980px){.history-split{grid-template-columns:1fr}}
