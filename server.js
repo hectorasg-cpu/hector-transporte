@@ -112,6 +112,8 @@ const initialState = {
       "status": "Disponible"
     }
   ],
+  "trash": [],
+  "auditLog": [],
   "orders": [
     {
       "id": "o4-mr18ogm9",
