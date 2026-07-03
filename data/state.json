@@ -25,8 +25,113 @@
       "id": "c4-mr18e355",
       "name": "Rodolfo",
       "contact": "Rodolfo",
-      "phone": "+569",
+      "phone": "+56 9 5351 3159",
       "city": "Limache"
+    },
+    {
+      "id": "c6-mr523h5t",
+      "name": "Abraham Nuñez",
+      "contact": "9 53002928",
+      "phone": "",
+      "city": "Santiago "
+    },
+    {
+      "id": "c7-mr524gkh",
+      "name": "Alexander Aranda ",
+      "contact": "9 90500883",
+      "phone": "",
+      "city": "Talcahuano"
+    },
+    {
+      "id": "c8-mr525fm1",
+      "name": "Alexi Jaque ",
+      "contact": "9 98272775",
+      "phone": "",
+      "city": "Cauquenes"
+    },
+    {
+      "id": "c9-mr5264o9",
+      "name": "Andres Valladares ",
+      "contact": "+56 9 4090 3150",
+      "phone": "",
+      "city": "Talcahuano"
+    },
+    {
+      "id": "c10-mr527zo1",
+      "name": "Pedro Soto ",
+      "contact": "9 62338097",
+      "phone": "",
+      "city": "Parral"
+    },
+    {
+      "id": "c11-mr5294k0",
+      "name": "Angelica Leyton",
+      "contact": "9 63213255",
+      "phone": "",
+      "city": "Santiago"
+    },
+    {
+      "id": "c12-mr52a6r4",
+      "name": "Beatriz Soto",
+      "contact": "9 95798779",
+      "phone": "",
+      "city": "Constitucion "
+    },
+    {
+      "id": "c13-mr52b6aw",
+      "name": "Blanca Echeverria",
+      "contact": "9 73715687",
+      "phone": "",
+      "city": "Constitucion "
+    },
+    {
+      "id": "c14-mr52byeg",
+      "name": "Carlos Yañez",
+      "contact": "9 40262559",
+      "phone": "",
+      "city": "Villa Alegre "
+    },
+    {
+      "id": "c15-mr52d76w",
+      "name": "Carmen Rebolledo (Italo Antola)",
+      "contact": "9 95192215",
+      "phone": "",
+      "city": "Concepcion "
+    },
+    {
+      "id": "c16-mr52fsog",
+      "name": "Cecilia Cornejo ",
+      "contact": "9 53448201",
+      "phone": "",
+      "city": "San Vicente Tagua Tagua"
+    },
+    {
+      "id": "c17-mr52h048",
+      "name": "Celsa Carrasco",
+      "contact": "9 82173914",
+      "phone": "",
+      "city": "Constitucion "
+    },
+    {
+      "id": "c18-mr52i694",
+      "name": "Cj e Hijos ",
+      "contact": "9 96768895",
+      "phone": "",
+      "city": "Melozal"
+    },
+    {
+      "id": "c19-mr52sv53",
+      "name": "Com Diaz Meza Don Pepe",
+      "contact": "9 98804010",
+      "phone": "",
+      "city": "Chanco"
+    },
+    {
+      "id": "c20-mr52utjj",
+      "name": "comercial Don Pancho",
+      "contact": "+56 9 9827 2775",
+      "phone": "",
+      "city": "Hualpen"
     }
   ],
   "trucks": [
@@ -142,180 +247,6 @@
           "collectPayment": false,
           "collectionAmount": "",
           "paymentStatus": "No aplica",
-          "notes": ""
-        }
-      ],
-      "helperIds": [],
-      "settlement": {
-        "finished": false,
-        "driverSettled": false,
-        "helpersSettled": false,
-        "returnedAmount": "",
-        "notes": ""
-      }
-    },
-    {
-      "id": "o3-mr3llhs5",
-      "code": "PED-1003",
-      "origin": "Melozal",
-      "date": "2026-07-02",
-      "truckId": "t1-mr189ebo",
-      "driverId": "d3",
-      "status": "Pendiente",
-      "stops": [
-        {
-          "clientId": "c5-mr184uk3",
-          "destination": "Conversar con Rodolfo",
-          "drums": "0",
-          "bottles": "0",
-          "collectPayment": false,
-          "collectionAmount": "",
-          "paymentStatus": "No aplica",
-          "notes": ""
-        }
-      ],
-      "helperIds": [],
-      "settlement": {
-        "finished": false,
-        "driverSettled": false,
-        "helpersSettled": false,
-        "returnedAmount": "",
-        "notes": ""
-      }
-    },
-    {
-      "id": "o4-mr3llhs6",
-      "code": "PED-1003",
-      "origin": "Melozal",
-      "date": "2026-07-02",
-      "truckId": "t1-mr189ebo",
-      "driverId": "d3",
-      "status": "Pendiente",
-      "stops": [
-        {
-          "clientId": "c5-mr184uk3",
-          "destination": "Conversar con Rodolfo",
-          "drums": "0",
-          "bottles": "0",
-          "collectPayment": false,
-          "collectionAmount": "",
-          "paymentStatus": "No aplica",
-          "notes": ""
-        }
-      ],
-      "helperIds": [],
-      "settlement": {
-        "finished": false,
-        "driverSettled": false,
-        "helpersSettled": false,
-        "returnedAmount": "",
-        "notes": ""
-      }
-    },
-    {
-      "id": "o5-mr3lurjy",
-      "code": "PED-1005",
-      "origin": "Melozal",
-      "date": "2026-07-02",
-      "truckId": "t1-mr189ebo",
-      "driverId": "d3",
-      "status": "Pendiente",
-      "stops": [
-        {
-          "clientId": "c5-mr184uk3",
-          "destination": "Conversar con Rodolfo",
-          "drums": "0",
-          "bottles": "0",
-          "collectPayment": false,
-          "collectionAmount": "",
-          "paymentStatus": "No aplica",
-          "notes": ""
-        }
-      ],
-      "helperIds": [],
-      "settlement": {
-        "finished": false,
-        "driverSettled": false,
-        "helpersSettled": false,
-        "returnedAmount": "",
-        "notes": ""
-      }
-    },
-    {
-      "id": "o6-mr3lurjz",
-      "code": "PED-1005",
-      "origin": "Melozal",
-      "date": "2026-07-02",
-      "truckId": "t1-mr189ebo",
-      "driverId": "d3",
-      "status": "Pendiente",
-      "stops": [
-        {
-          "clientId": "c5-mr184uk3",
-          "destination": "Conversar con Rodolfo",
-          "drums": "0",
-          "bottles": "0",
-          "collectPayment": false,
-          "collectionAmount": "",
-          "paymentStatus": "No aplica",
-          "notes": ""
-        }
-      ],
-      "helperIds": [],
-      "settlement": {
-        "finished": false,
-        "driverSettled": false,
-        "helpersSettled": false,
-        "returnedAmount": "",
-        "notes": ""
-      }
-    },
-    {
-      "id": "o7-mr3wquro",
-      "code": "PED-1007",
-      "origin": "Melozal",
-      "date": "2026-07-02",
-      "truckId": "t1-mr189ebo",
-      "driverId": "d3",
-      "status": "Pendiente",
-      "stops": [
-        {
-          "clientId": "c4-mr18e355",
-          "destination": "Conversar con Rodolfo",
-          "drums": "1008",
-          "bottles": "0",
-          "collectPayment": true,
-          "collectionAmount": "4219488",
-          "paymentStatus": "Pendiente",
-          "notes": ""
-        }
-      ],
-      "helperIds": [],
-      "settlement": {
-        "finished": false,
-        "driverSettled": false,
-        "helpersSettled": false,
-        "returnedAmount": "",
-        "notes": ""
-      }
-    },
-    {
-      "id": "o8-mr3wqurq",
-      "code": "PED-1007",
-      "origin": "Melozal",
-      "date": "2026-07-03",
-      "truckId": "t1-mr189ebo",
-      "driverId": "d3",
-      "status": "Pendiente",
-      "stops": [
-        {
-          "clientId": "c4-mr18e355",
-          "destination": "Conversar con Rodolfo",
-          "drums": "1008",
-          "bottles": "0",
-          "collectPayment": true,
-          "collectionAmount": "4219488",
-          "paymentStatus": "Pendiente",
           "notes": ""
         }
       ],
