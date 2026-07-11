@@ -16,6 +16,7 @@
         <button class="tab active" data-view="dashboard">Inicio</button>
         <button class="tab" data-view="orders">Pedidos</button>
         <button class="tab" data-view="clients">Clientes</button>
+        <button class="tab" data-view="products">Productos</button>
         <button class="tab" data-view="trucks">Camiones</button>
         <button class="tab" data-view="tractorTrailers">Tractores y Colosos</button>
         <button class="tab" data-view="drivers">Conductores</button>
@@ -55,6 +56,10 @@
         <div class="list-tools"><input id="clientSearch" class="search-input" type="search" placeholder="Buscar cliente por nombre, contacto, telefono o ciudad" autocomplete="off"><span id="clientSearchCount" class="muted-count"></span></div>
         <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Contacto</th><th>Telefono</th><th>Ciudad</th><th></th></tr></thead><tbody id="clientsTable"></tbody></table></div>
       </section>
+      <section id="products" class="view">
+        <div class="section-heading"><div><h2>Productos</h2><p>SKU disponibles para armar pedidos: tapa, volumen, tipo de vino y marca.</p></div><button id="newProduct" class="primary-button">Agregar producto</button></div>
+        <div class="table-wrap"><table><thead><tr><th>SKU</th><th>Tapa</th><th>Volumen</th><th>Tipo de vino</th><th>Marca</th><th></th></tr></thead><tbody id="productsTable"></tbody></table></div>
+      </section>
       <section id="trucks" class="view">
         <div class="section-heading"><div><h2>Camiones</h2><p>Patente, capacidad y disponibilidad de la flota.</p></div><button id="newTruck" class="primary-button">Agregar camion</button></div>
         <div class="table-wrap"><table><thead><tr><th>Patente</th><th>Modelo</th><th>Capacidad</th><th>Estado</th><th></th></tr></thead><tbody id="trucksTable"></tbody></table></div>
@@ -86,6 +91,6 @@
       </section>
     </main>
     <dialog id="editor"><form id="editorForm"><div class="modal-head"><h2 id="editorTitle">Editar</h2><button type="button" data-close-editor class="icon-button" aria-label="Cerrar">x</button></div><div id="editorFields" class="form-grid"></div><menu><button type="button" data-close-editor class="ghost-button">Cancelar</button><button id="saveEditor" type="button" class="primary-button">Guardar</button></menu></form></dialog>
-    <script src="./app.js?v=filtros-busqueda-20260711"></script>
+    <script src="./app.js?v=productos-sku-20260711"></script>
   </body>
 </html>
