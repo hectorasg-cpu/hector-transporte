@@ -1,4 +1,4 @@
-window.__appVersion = 'integration-sku-20260713';
+window.__appVersion = 'order-statuses-20260714';
 const state = {
   clients: [
     { id: "c1", name: "Distribuidora Norte", contact: "Ana Morales", phone: "+56 9 6123 4455", city: "Santiago" },
@@ -112,8 +112,11 @@ function importState(file) {
 
 const managedCollections = ['clients', 'products', 'trucks', 'tractorTrailers', 'drivers', 'helpers', 'orders'];
 const collectionNames = { clients: 'Clientes', products: 'Productos', trucks: 'Camiones', tractorTrailers: 'Tractores y Colosos', drivers: 'Conductores', helpers: 'Peonetas', orders: 'Pedidos' };
+const orderStatuses = ['Ingresado', 'En preparación', 'Preparado', 'Despachado', 'Terminado', 'Cancelado'];
+const legacyOrderStatusMap = { Pendiente: 'Ingresado', Programado: 'Ingresado', 'En ruta': 'Despachado' };
+function normalizeOrderStatus(status) { return legacyOrderStatusMap[status] || (orderStatuses.includes(status) ? status : 'Ingresado'); }
 function cloneData(value) { return JSON.parse(JSON.stringify(value)); }
-function normalizeState() { managedCollections.forEach((collection) => { if (!Array.isArray(state[collection])) state[collection] = []; }); if (!Array.isArray(state.trash)) state.trash = []; if (!Array.isArray(state.auditLog)) state.auditLog = []; }
+function normalizeState() { managedCollections.forEach((collection) => { if (!Array.isArray(state[collection])) state[collection] = []; }); if (!Array.isArray(state.trash)) state.trash = []; if (!Array.isArray(state.auditLog)) state.auditLog = []; state.orders.forEach((order) => { order.status = normalizeOrderStatus(order.status); }); }
 function entryId(prefix) { return prefix + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 7); }
 function describeItem(collection, item = {}) { if (collection === 'orders') return item.code || item.id || 'Pedido'; if (collection === 'products') return productLabel(item); if (collection === 'clients' || collection === 'drivers' || collection === 'helpers') return item.name || item.id || 'Registro'; if (collection === 'trucks' || collection === 'tractorTrailers') return [item.plate, item.model].filter(Boolean).join(' - ') || item.id || 'Equipo'; return item.id || 'Registro'; }
 function formatDateTime(value) { return new Intl.DateTimeFormat('es-CL', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(value)); }
@@ -291,11 +294,11 @@ const schemas = {
   tractorTrailers: { title: 'Tractor/Coloso', prefix: 'tc', fields: [['type', 'Tipo', 'select', ['Tractor', 'Coloso']], ['plate', 'Patente/Codigo', 'text'], ['model', 'Modelo', 'text'], ['capacity', 'Capacidad', 'text'], ['status', 'Estado', 'select', ['Disponible', 'En ruta', 'Mantencion', 'Arrendado']]] },
   drivers: { title: 'Conductor', prefix: 'd', fields: [['name', 'Nombre', 'text'], ['phone', 'Telefono', 'tel'], ['license', 'Licencia', 'text'], ['status', 'Estado', 'select', ['Disponible', 'En ruta', 'Descanso']]] },
   helpers: { title: 'Peoneta', prefix: 'p', fields: [['name', 'Nombre', 'text'], ['phone', 'Telefono', 'tel'], ['status', 'Estado', 'select', ['Disponible', 'En ruta', 'Descanso']]] },
-  orders: { title: 'Pedido', prefix: 'o', fields: [['code', 'Codigo', 'text'], ['origin', 'Origen', 'text'], ['date', 'Fecha', 'date'], ['truckId', 'Camion', 'trucks'], ['driverId', 'Conductor', 'drivers'], ['status', 'Estado', 'select', ['Pendiente', 'Programado', 'En ruta', 'Terminado']]] }
+  orders: { title: 'Pedido', prefix: 'o', fields: [['code', 'Codigo', 'text'], ['origin', 'Origen', 'text'], ['date', 'Fecha', 'date'], ['truckId', 'Camion', 'trucks'], ['driverId', 'Conductor', 'drivers'], ['status', 'Estado', 'select', orderStatuses]] }
 };
 let editing = null;
 
-function defaultValue(collection, key) { if (collection === 'orders' && key === 'code') return 'PED-' + (1000 + state.orders.length + 1); if (key === 'date') return formatIsoLocal(new Date()); if (key === 'status') return collection === 'orders' ? 'Pendiente' : 'Disponible'; if (key === 'truckId') return state.trucks[0]?.id || ''; if (key === 'driverId') return state.drivers[0]?.id || ''; return ''; }
+function defaultValue(collection, key) { if (collection === 'orders' && key === 'code') return 'PED-' + (1000 + state.orders.length + 1); if (key === 'date') return formatIsoLocal(new Date()); if (key === 'status') return collection === 'orders' ? 'Ingresado' : 'Disponible'; if (key === 'truckId') return state.trucks[0]?.id || ''; if (key === 'driverId') return state.drivers[0]?.id || ''; return ''; }
 function fieldSelect(key, label, value, options) { const normalized = options.map((option) => Array.isArray(option) ? option : [option, option]); return '<div class="field"><label for="' + key + '">' + label + '</label><select id="' + key + '" name="' + key + '" required>' + normalized.map(([optionValue, optionLabel]) => '<option value="' + optionValue + '" ' + (optionValue === value ? 'selected' : '') + '>' + optionLabel + '</option>').join('') + '</select></div>'; }
 function inputField(key, label, type, value) { const numericAttrs = type === 'number' ? ' min="0" step="1"' : ''; return '<div class="field"><label for="' + key + '">' + label + '</label><input id="' + key + '" name="' + key + '" type="' + type + '" value="' + escapeAttr(value) + '"' + numericAttrs + ' required></div>'; }
 function productLineRow(line = {}, index = 0) { const productOptions = state.products.map((product) => '<option value="' + product.id + '" ' + (product.id === line.productId ? 'selected' : '') + '>' + productLabel(product) + '</option>').join(''); const emptyOption = state.products.length ? '' : '<option value="">Agrega productos primero</option>'; return '<div class="product-line"><div class="field"><label>SKU / Producto</label><select name="lineProduct" ' + (state.products.length ? 'required' : '') + '>' + emptyOption + productOptions + '</select></div><div class="field"><label>Cantidad</label><input name="lineQuantity" type="number" min="0" step="1" value="' + escapeAttr(line.quantity || '0') + '" placeholder="0"></div><div class="field"><label>Notas</label><input name="lineNotes" type="text" value="' + escapeAttr(line.notes || '') + '" placeholder="Opcional"></div><button type="button" class="text-button" data-remove-product-line>Quitar</button></div>'; }
