@@ -32,7 +32,42 @@
     return String(value || '').replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
   }
   function colorCode(value) {
-    return String(value || '').normalize('NFD').replace(/[̀-ͯ]/g, '').trim().toUpperCase();
+    const clean = String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toUpperCase();
+    if (clean === 'ROJO') return 'ROJA';
+    if (clean === 'NEGRO') return 'NEGRA';
+    return clean;
+  }
+  function normKey(value) {
+    return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+  function brandCodeFor(value) {
+    const key = normKey(value);
+    if (key.includes('tio lucas')) return 'TL';
+    if (key.includes('baron del maule')) return 'BM';
+    if (key.includes('vinos saavedra')) return 'SAAV';
+    if (key.includes('las casas')) return 'LCM';
+    if (key.includes('alfonsina')) return 'ALF';
+    if (key.includes('vina saavedra')) return 'VSA';
+    return colorCode(value).slice(0, 6);
+  }
+  function typeCodeFor(value) {
+    const key = normKey(value);
+    if (key === 'tinto') return 'TIN';
+    if (key === 'blanco') return 'BLA';
+    if (key.includes('pipe')) return 'BPIPE';
+    if (key === 'cabernet') return 'CAB';
+    if (key.includes('cabernet varietal')) return 'CAB-VAR';
+    if (key.includes('cabernet gran reserva')) return 'CAB-GRES';
+    if (key.includes('cabernet reserva')) return 'CAB-RES';
+    if (key.includes('carmenere varietal')) return 'CAR-VAR';
+    if (key.includes('carmenere gran reserva')) return 'CAR-GRES';
+    if (key.includes('carmenere reserva')) return 'CAR-RES';
+    if (key.includes('syrah gran reserva')) return 'SYR-GRES';
+    if (key.includes('syrah reserva')) return 'SYR-RES';
+    if (key.includes('dry')) return 'DRY';
+    if (key.includes('red blend')) return 'RED';
+    if (key.includes('pais')) return 'PAI-EVO';
+    return colorCode(value).slice(0, 10);
   }
   function volumeCode(value) {
     return String(value || '').replace('1.5 L', '1_5L').replace('750 CC', '750CC').replace(/s+/g, '');
