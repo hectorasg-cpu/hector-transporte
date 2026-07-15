@@ -91,6 +91,37 @@
       </section>
     </main>
     <dialog id="editor"><form id="editorForm"><div class="modal-head"><h2 id="editorTitle">Editar</h2><button type="button" data-close-editor class="icon-button" aria-label="Cerrar">x</button></div><div id="editorFields" class="form-grid"></div><menu><button type="button" data-close-editor class="ghost-button">Cancelar</button><button id="saveEditor" type="button" class="primary-button">Guardar</button></menu></form></dialog>
-    <script src="./app.js?v=productos-sku-20260711"></script>
+    <script src="./app.js?v=dedup-20260715"></script>
+    <script>
+      (function () {
+        if (window.__saveEditorDedupPatch) return;
+        window.__saveEditorDedupPatch = true;
+        let savingEditor = false;
+        async function guardedSave(event) {
+          if (event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+          if (savingEditor) return;
+          savingEditor = true;
+          const button = document.getElementById('saveEditor');
+          if (button) button.disabled = true;
+          try {
+            if (typeof window.saveEditor === 'function') await window.saveEditor(event);
+          } finally {
+            setTimeout(() => {
+              savingEditor = false;
+              if (button) button.disabled = false;
+            }, 800);
+          }
+        }
+        document.addEventListener('click', (event) => {
+          if (event.target.closest('#saveEditor')) guardedSave(event);
+        }, true);
+        document.addEventListener('submit', (event) => {
+          if (event.target && event.target.id === 'editorForm') guardedSave(event);
+        }, true);
+      })();
+    </script>
   </body>
 </html>
