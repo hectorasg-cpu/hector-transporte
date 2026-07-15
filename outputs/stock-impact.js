@@ -54,8 +54,8 @@
     return prefix + '-' + colorCode(capColor(product));
   }
   function labelCode(product) {
-    const brand = brandCode[product.brand] || colorCode(product.brand).slice(0, 6);
-    const type = typeCode[product.wineType] || typeCode[product.type] || colorCode(product.wineType || product.type).slice(0, 10);
+    const brand = brandCodeFor(product.brand);
+    const type = typeCodeFor(product.wineType || product.type);
     return 'ETIQUETA-' + brand + '-' + type + '-' + volumeCode(product.volume);
   }
   function integrationSku(product) {
@@ -111,7 +111,21 @@
       button.className = 'tab';
       button.dataset.view = 'stockImpact';
       button.textContent = 'Impacto stock';
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.view').forEach((view) => view.classList.toggle('active', view.id === 'stockImpact'));
+        document.querySelectorAll('.tab').forEach((tab) => tab.classList.toggle('active', tab.dataset.view === 'stockImpact'));
+        renderImpact();
+      });
       nav.appendChild(button);
+    }
+    const existingButton = document.querySelector('[data-view="stockImpact"]');
+    if (existingButton && !existingButton.dataset.impactBound) {
+      existingButton.dataset.impactBound = 'true';
+      existingButton.addEventListener('click', () => {
+        document.querySelectorAll('.view').forEach((view) => view.classList.toggle('active', view.id === 'stockImpact'));
+        document.querySelectorAll('.tab').forEach((tab) => tab.classList.toggle('active', tab.dataset.view === 'stockImpact'));
+        renderImpact();
+      });
     }
     if (!document.querySelector('#stockImpact')) {
       const section = document.createElement('section');
@@ -120,8 +134,8 @@
       section.innerHTML = '<div class="section-heading"><div><h2>Impacto en stock</h2><p>Vista informativa. No reserva ni descuenta stock.</p></div><button id="refreshStockImpact" class="ghost-button" type="button">Actualizar</button></div><div id="stockImpactSummary" class="metric-grid"></div><section class="panel table-card"><div class="section-heading"><h2>Por pedido</h2><span id="stockImpactCount" class="badge">0</span></div><div class="table-scroll"><table><thead><tr><th>Pedido</th><th>Estado</th><th>Productos</th><th>Insumos calculados</th></tr></thead><tbody id="stockImpactRows"></tbody></table></div></section><section class="panel table-card"><div class="section-heading"><h2>Total insumos</h2></div><div id="stockImpactTotals" class="stack"></div></section>';
       const main = document.querySelector('main.app');
       const editor = document.querySelector('#editor');
-      if (main && editor) document.body.insertBefore(section, editor);
-      else if (main) main.appendChild(section);
+      if (main) main.appendChild(section);
+      else if (editor) document.body.insertBefore(section, editor);
     }
     const refresh = document.querySelector('#refreshStockImpact');
     if (refresh && !refresh.dataset.bound) {
