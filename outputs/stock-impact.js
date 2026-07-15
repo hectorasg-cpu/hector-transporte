@@ -166,7 +166,7 @@
       const section = document.createElement('section');
       section.id = 'stockImpact';
       section.className = 'view';
-      section.innerHTML = '<div class="section-heading"><div><h2>Impacto en stock</h2><p>Vista informativa. No reserva ni descuenta stock.</p></div><button id="refreshStockImpact" class="ghost-button" type="button">Actualizar</button></div><div id="stockImpactSummary" class="metric-grid"></div><section class="panel table-card"><div class="section-heading"><h2>Por pedido</h2><span id="stockImpactCount" class="badge">0</span></div><div class="table-scroll"><table><thead><tr><th>Pedido</th><th>Estado</th><th>Productos</th><th>Insumos calculados</th></tr></thead><tbody id="stockImpactRows"></tbody></table></div></section><section class="panel table-card"><div class="section-heading"><h2>Total insumos</h2></div><div id="stockImpactTotals" class="stack"></div></section>';
+      section.innerHTML = '<div class="section-heading"><div><h2>Impacto en stock</h2><p>Vista informativa. No reserva ni descuenta stock.</p></div><button id="refreshStockImpact" class="ghost-button" type="button">Actualizar</button></div><div class="toolbar" style="grid-template-columns:minmax(180px, 260px) 1fr;margin-bottom:18px"><label><span>Estado</span><select id="stockImpactStatusFilter"><option value="Todos">Todos los estados</option><option value="Ingresado">Ingresado</option><option value="En preparación">En preparación</option><option value="Preparado">Preparado</option><option value="Despachado">Despachado</option><option value="Terminado">Terminado</option><option value="Cancelado">Cancelado</option></select></label><span id="stockImpactFilterHint" class="badge">Todos los estados</span></div><div id="stockImpactSummary" class="metric-grid"></div><section class="panel table-card"><div class="section-heading"><h2>Por pedido</h2><span id="stockImpactCount" class="badge">0</span></div><div class="table-scroll"><table><thead><tr><th>Pedido</th><th>Estado</th><th>Productos</th><th>Insumos calculados</th></tr></thead><tbody id="stockImpactRows"></tbody></table></div></section><section class="panel table-card"><div class="section-heading"><h2>Total insumos</h2></div><div id="stockImpactTotals" class="stack"></div></section>';
       const main = document.querySelector('main.app');
       const editor = document.querySelector('#editor');
       if (main) main.appendChild(section);
@@ -176,6 +176,11 @@
     if (refresh && !refresh.dataset.bound) {
       refresh.dataset.bound = 'true';
       refresh.addEventListener('click', renderImpact);
+    }
+    const statusFilter = document.querySelector('#stockImpactStatusFilter');
+    if (statusFilter && !statusFilter.dataset.bound) {
+      statusFilter.dataset.bound = 'true';
+      statusFilter.addEventListener('change', renderImpact);
     }
   }
   async function getState() {
@@ -195,7 +200,11 @@
     try {
       const state = await getState();
       const productsById = new Map((state.products || []).map((product) => [product.id, product]));
-      const orders = (state.orders || []).slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+      const selectedStatus = document.querySelector('#stockImpactStatusFilter')?.value || 'Todos';
+      const allOrders = (state.orders || []).slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+      const orders = selectedStatus === 'Todos' ? allOrders : allOrders.filter((order) => (order.status || 'Sin estado') === selectedStatus);
+      const filterHint = document.querySelector('#stockImpactFilterHint');
+      if (filterHint) filterHint.textContent = selectedStatus === 'Todos' ? 'Todos los estados' : selectedStatus;
       const totals = new Map();
       let totalUnits = 0;
       rowsEl.innerHTML = orders.map((order) => {
@@ -206,8 +215,8 @@
       }).join('') || '<tr><td colspan="4">No hay pedidos para calcular.</td></tr>';
       const totalItems = Array.from(totals.values()).sort((a, b) => a.code.localeCompare(b.code));
       totalsEl.innerHTML = totalItems.length ? totalItems.map((item) => '<article class="item"><strong>' + escapeHtml(item.code) + '</strong><span>' + formatNumber(item.qty) + ' unidades · ' + escapeHtml(item.kind) + '</span></article>').join('') : '<p>Sin insumos calculados.</p>';
-      document.querySelector('#stockImpactCount').textContent = orders.length + ' pedidos';
-      summaryEl.innerHTML = '<article class="metric"><span>Pedidos revisados</span><strong>' + orders.length + '</strong></article><article class="metric"><span>Productos en pedidos</span><strong>' + formatNumber(totalUnits) + '</strong></article><article class="metric"><span>Insumos distintos</span><strong>' + totalItems.length + '</strong></article>';
+      document.querySelector('#stockImpactCount').textContent = orders.length + ' de ' + allOrders.length + ' pedidos';
+      summaryEl.innerHTML = '<article class="metric"><span>Pedidos revisados</span><strong>' + orders.length + '</strong></article><article class="metric"><span>Productos en pedidos</span><strong>' + formatNumber(totalUnits) + '</strong></article><article class="metric"><span>Insumos distintos</span><strong>' + totalItems.length + '</strong></article><article class="metric"><span>Filtro activo</span><strong>' + escapeHtml(selectedStatus === 'Todos' ? 'Todos' : selectedStatus) + '</strong></article>'; 
     } catch (error) {
       rowsEl.innerHTML = '<tr><td colspan="4">' + escapeHtml(error.message) + '</td></tr>';
     }
