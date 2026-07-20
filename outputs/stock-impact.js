@@ -72,12 +72,21 @@
   function volumeCode(value) {
     return String(value || '').replace('1.5 L', '1_5L').replace('750 CC', '750CC').replace(/s+/g, '');
   }
-  function packageCode(volume) {
-    if (volume === '5 L') return 'BIDON-5L';
-    if (volume === '3 L') return 'BIDON-3L';
-    if (volume === '2 L') return 'BIDON-2L';
+  function bidonColorCode(product) {
+    const type = product.wineType || product.type || '';
+    if (type.includes('Cabernet')) return 'NEGRO';
+    if (type.includes('Blanco-Pipeño') || type.includes('Pipeño')) return 'ROJO';
+    if (type.includes('Tinto')) return 'ROJO';
+    if (type.includes('Blanco')) return 'VERDE';
+    return colorCode(product.capColor || product.color || '');
+  }
+  function packageCode(product) {
+    const volume = product.volume || product;
+    if (volume === '5 L') return 'BIDON-5L-' + bidonColorCode(product);
+    if (volume === '3 L') return 'BIDON-3L-' + bidonColorCode(product);
+    if (volume === '2 L') return 'BIDON-2L-' + bidonColorCode(product);
+    if (volume === '1 L') return 'BIDON-1L-' + bidonColorCode(product);
     if (volume === '1.5 L') return 'BOTELLA-1_5L';
-    if (volume === '1 L') return 'BOTELLA-1L';
     return 'BOTELLA-750CC';
   }
   function capColor(product) {
@@ -99,7 +108,7 @@
   function recipeFor(product) {
     if (!product) return [];
     return [
-      { kind: 'Envase', code: packageCode(product.volume), qty: 1 },
+      { kind: 'Envase', code: packageCode(product), qty: 1 },
       { kind: (product.cap || '') === 'Cápsula' ? 'Capsula' : 'Tapa', code: capCode(product), qty: 1 },
       { kind: 'Etiqueta', code: labelCode(product), qty: 1 }
     ];
